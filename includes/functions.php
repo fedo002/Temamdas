@@ -544,3 +544,18 @@ function getUserDailyAttempts($user_id) {
     ];
 }
 
+// Oyun ayarlarını getir
+function getGameSettings() {
+    $conn = dbConnect();
+    $settings = [];
+    
+    $result = $conn->query("SELECT * FROM game_settings");
+    
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $settings[$row['setting_key']] = $row['setting_value'];
+        }
+    }
+    
+    return $settings;
+}
