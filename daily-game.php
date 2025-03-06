@@ -161,71 +161,73 @@ include 'includes/header.php';
     </div>
     
     <!-- Stage 3: Üçüncü Aşama Kartları (gizli, JavaScript ile gösterilecek) -->
-    <div class="row" id="stage3" style="display: none;">
-        <div class="col-12 mb-4 text-center">
-            <h3>Aşama 3: Şansını Dene!</h3>
-            <p>Üç karttan birini seç ve kazancını katla!</p>
-            <p>Olası Ödüller: 
-                <span class="badge bg-secondary"><?= number_format($stage2_rewards['low'], 2) ?> USDT</span>
-                <span class="badge bg-primary"><?= number_format($stage2_rewards['medium'], 2) ?> USDT</span>
-                <span class="badge bg-warning"><?= number_format($stage2_rewards['high'], 2) ?> USDT</span>
-            </p>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="game-card" id="final-card1" onclick="selectFinalCard('final-card1')">
-                <div class="game-card-inner">
-                    <div class="game-card-front">
-                        <div class="text-center">
-                            <i class="fas fa-question-circle fa-4x mb-3"></i>
-                            <h4>Kart 1</h4>
-                        </div>
-                    </div>
-                    <div class="game-card-back">
-                        <div class="text-center card-result" id="final-card1-result">
-                            <!-- Kart sonucu burada gösterilecek -->
-                        </div>
+    <!-- HTML yapısını düzenleyelim, daily-game.php dosyasında: -->
+<!-- Stage 3: Üçüncü Aşama Kartları (gizli, JavaScript ile gösterilecek) -->
+<div class="row game-cards-row" id="stage3" style="display: none;">
+    <div class="col-12 mb-4 text-center">
+        <h3>Aşama 3: Şansını Dene!</h3>
+        <p>Üç karttan birini seç ve kazancını katla!</p>
+        <p>Olası Ödüller: 
+            <span class="badge bg-secondary"><?= number_format($stage2_rewards['low'], 2) ?> USDT</span>
+            <span class="badge bg-primary"><?= number_format($stage2_rewards['medium'], 2) ?> USDT</span>
+            <span class="badge bg-warning"><?= number_format($stage2_rewards['high'], 2) ?> USDT</span>
+        </p>
+    </div>
+    
+    <div class="game-card-col">
+        <div class="game-card" id="final-card1" onclick="selectFinalCard('final-card1')">
+            <div class="game-card-inner">
+                <div class="game-card-front">
+                    <div class="text-center">
+                        <i class="fas fa-question-circle fa-4x mb-3"></i>
+                        <h4>Kart 1</h4>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="game-card" id="final-card2" onclick="selectFinalCard('final-card2')">
-                <div class="game-card-inner">
-                    <div class="game-card-front">
-                        <div class="text-center">
-                            <i class="fas fa-question-circle fa-4x mb-3"></i>
-                            <h4>Kart 2</h4>
-                        </div>
-                    </div>
-                    <div class="game-card-back">
-                        <div class="text-center card-result" id="final-card2-result">
-                            <!-- Kart sonucu burada gösterilecek -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="game-card" id="final-card3" onclick="selectFinalCard('final-card3')">
-                <div class="game-card-inner">
-                    <div class="game-card-front">
-                        <div class="text-center">
-                            <i class="fas fa-question-circle fa-4x mb-3"></i>
-                            <h4>Kart 3</h4>
-                        </div>
-                    </div>
-                    <div class="game-card-back">
-                        <div class="text-center card-result" id="final-card3-result">
-                            <!-- Kart sonucu burada gösterilecek -->
-                        </div>
+                <div class="game-card-back">
+                    <div class="text-center card-result" id="final-card1-result">
+                        <!-- Kart sonucu burada gösterilecek -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <div class="game-card-col">
+        <div class="game-card" id="final-card2" onclick="selectFinalCard('final-card2')">
+            <div class="game-card-inner">
+                <div class="game-card-front">
+                    <div class="text-center">
+                        <i class="fas fa-question-circle fa-4x mb-3"></i>
+                        <h4>Kart 2</h4>
+                    </div>
+                </div>
+                <div class="game-card-back">
+                    <div class="text-center card-result" id="final-card2-result">
+                        <!-- Kart sonucu burada gösterilecek -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="game-card-col">
+        <div class="game-card" id="final-card3" onclick="selectFinalCard('final-card3')">
+            <div class="game-card-inner">
+                <div class="game-card-front">
+                    <div class="text-center">
+                        <i class="fas fa-question-circle fa-4x mb-3"></i>
+                        <h4>Kart 3</h4>
+                    </div>
+                </div>
+                <div class="game-card-back">
+                    <div class="text-center card-result" id="final-card3-result">
+                        <!-- Kart sonucu burada gösterilecek -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     
     <!-- Sonuç Modalı -->
     <div class="modal fade" id="resultModal" tabindex="-1">
@@ -408,6 +410,9 @@ function doubleOrNothing() {
     document.getElementById('stage2').style.display = 'none';
     document.getElementById('stage3').style.display = 'block';
     gameState.stage = 3;
+    
+    // Konsola debugging bilgisi
+    console.log("Moving to stage 3. Game state:", gameState);
 }
 
 function takePrize() {
@@ -449,8 +454,15 @@ function takePrize() {
     });
 }
 
+
 function selectFinalCard(cardId) {
-    if (gameState.stage !== 3) return;
+    // Debug için log ekleyelim
+    console.log("selectFinalCard called with:", cardId, "Current stage:", gameState.stage);
+    
+    if (gameState.stage !== 3) {
+        console.error("Wrong game stage! Expected 3, got:", gameState.stage);
+        return;
+    }
     
     // Tüm kartları devre dışı bırak
     document.querySelectorAll('#stage3 .game-card').forEach(card => {

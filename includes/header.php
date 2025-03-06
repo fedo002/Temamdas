@@ -50,19 +50,39 @@
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.php">
-                <img src="assets/images/logo.png" alt="<?= APP_NAME ?>" height="30" class="me-2">
-                <?= APP_NAME ?>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
+<!-- header.php dosyasına çeviri düğmesi ekleyelim -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.php">
+            <img src="assets/images/logo.png" alt="<?= APP_NAME ?>" height="30" class="me-2">
+            <?= APP_NAME ?>
+        </a>
+        
+        <!-- Çeviri düğmesi ekleyelim (mobil görünüm için) -->
+        <div class="translate-button d-flex d-lg-none me-2">
+            <div class="dropdown">
+                <a class="btn btn-sm btn-outline-light dropdown-toggle" href="#" role="button" id="translateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-language"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="translateDropdown">
+                    <li><a class="dropdown-item" href="#" onclick="changeLanguage('tr')">Türkçe</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="changeLanguage('de')">Deutsch</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="changeLanguage('es')">Español</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="changeLanguage('fr')">Français</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Mevcut menü öğeleri -->
+                <!-- ... -->
+                <li class="nav-item">
                         <a class="nav-link <?= $page_title == 'Ana Sayfa' ? 'active' : '' ?>" href="index.php">Ana Sayfa</a>
                     </li>
                     <li class="nav-item">
@@ -95,10 +115,25 @@
                             <a class="nav-link btn btn-sm btn-outline-light ms-2 px-3" href="register.php">Kayıt Ol</a>
                         </li>
                     <?php endif; ?>
-                </ul>
-            </div>
+                <!-- Çeviri düğmesi ekleyelim (masaüstü görünüm için) -->
+                <li class="nav-item dropdown d-none d-lg-block">
+                    <a class="nav-link dropdown-toggle" href="#" id="translateDropdownLg" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-language me-1"></i> Dil
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="translateDropdownLg">
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('tr')">Türkçe</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('de')">Deutsch</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('es')">Español</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('fr')">Français</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </nav>
-    
+    </div>
+</nav>
+
+
+
     <!-- Padding for fixed navbar -->
     <div style="padding-top: 70px;"></div>

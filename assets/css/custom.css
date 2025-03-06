@@ -692,6 +692,33 @@ a:hover {
 
 
 /* Card de Game Styles */
+/* CSS düzenlemesi için aşağıdaki kodu custom.css dosyanıza ekleyin */
+.row.game-cards-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.game-card-col {
+    flex: 0 0 auto;
+    width: 30%; /* Masaüstünde 3 kart yan yana */
+    padding: 0 10px;
+    margin-bottom: 20px;
+}
+
+/* Mobil cihazlarda da yanyana durmaları için */
+@media (max-width: 767px) {
+    .game-card-col {
+        width: 45%; /* Mobilde 2 kart yan yana */
+    }
+}
+
+@media (max-width: 480px) {
+    .game-card-col {
+        width: 45%; /* Daha küçük ekranlarda da 2 kart yan yana */
+    }
+}
+
 
 .row#stage2, .row#stage3 {
     display: flex;
