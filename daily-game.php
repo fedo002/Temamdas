@@ -15,30 +15,48 @@ $user = getUserDetails($user_id);
 $vip_level = $user['vip_level'];
 $vip_details = getVipDetails($vip_level);
 
+// Oyun ayarlarını veritabanından al
+$game_settings = getGameSettings();
+
+// Oyun aktif mi kontrol et
+if ($game_settings['daily_game_active'] != '1') {
+    header('Location: dashboard.php?error=game_disabled');
+    exit;
+}
 
 // Günlük kalan deneme hakkını kontrol et
 $daily_attempts = getUserDailyAttempts($user_id);
 $max_attempts = $vip_details['daily_game_limit'];
+$remaining_attempts = $max_attempts - intval($daily_attempts);
 
-// $daily_attempts'in sayı olduğundan emin olalım
-$daily_attempts = intval($daily_attempts);
-$remaining_attempts = $max_attempts - $daily_attempts;
-
-// VIP seviyesine göre ödül ve şans değerlerini al
-$stage1_base_reward = 5; // Temel 1. aşama ödülü
+// VIP seviyesine göre ödül ve şans değerlerini hesapla
+$vip_bonus_multiplier = floatval($game_settings['vip_bonus_multiplier']);
+$stage1_base_reward = floatval($game_settings['stage1_base_reward']); 
 $stage1_win_chance = $vip_details['game_max_win_chance']; // VIP seviyesine göre kazanma şansı
 
+// VIP seviyesine göre ödülleri hesapla
 $stage2_rewards = [
-    'low' => 3 + ($vip_level * 0.5), // VIP seviyesi arttıkça düşük ödül de artar
-    'medium' => 7 + ($vip_level * 1), // VIP seviyesi arttıkça orta ödül de artar
-    'high' => 10 + ($vip_level * 2)   // VIP seviyesi arttıkça yüksek ödül de artar
+    'low' => floatval($game_settings['stage2_low_reward']) + ($vip_level * $vip_bonus_multiplier),
+    'medium' => floatval($game_settings['stage2_medium_reward']) + ($vip_level * $vip_bonus_multiplier * 2),
+    'high' => floatval($game_settings['stage2_high_reward']) + ($vip_level * $vip_bonus_multiplier * 4)
 ];
 
+// VIP seviyesine göre şansları hesapla (VIP seviyesi arttıkça yüksek ödül şansı artar)
+$vip_chance_adjustment = $vip_level * 0.05; // Her VIP seviyesi için %5 şans kaydırması
 $stage2_chances = [
-    'low' => 0.60 - ($vip_level * 0.05), // VIP seviyesi arttıkça düşük ödül şansı azalır
-    'medium' => 0.25,
-    'high' => 0.15 + ($vip_level * 0.05) // VIP seviyesi arttıkça yüksek ödül şansı artar
+    'low' => max(0.1, floatval($game_settings['stage2_low_chance']) - $vip_chance_adjustment),
+    'medium' => floatval($game_settings['stage2_medium_chance']),
+    'high' => min(0.9, floatval($game_settings['stage2_high_chance']) + $vip_chance_adjustment)
 ];
+
+// Şansların toplamının 1.0 olduğundan emin ol
+$total_chance = $stage2_chances['low'] + $stage2_chances['medium'] + $stage2_chances['high'];
+if (abs($total_chance - 1.0) > 0.01) { // Küçük bir hata payı bırak
+    // Şansları normalize et
+    $stage2_chances['low'] /= $total_chance;
+    $stage2_chances['medium'] /= $total_chance;
+    $stage2_chances['high'] /= $total_chance;
+}
 
 $page_title = 'Günlük Ödül Oyunu';
 include 'includes/header.php';
