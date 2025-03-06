@@ -71,9 +71,6 @@
                     <li class="nav-item">
                         <a class="nav-link <?= ($page_title == 'VIP Paketleri' || $page_title == 'Mining Paketleri') ? 'active' : '' ?>" href="packages.php">Paketler</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?= $page_title == 'İletişim' ? 'active' : '' ?>" href="contact.php">İletişim</a>
-                    </li>
                     
                     <?php if(isset($_SESSION['user_id'])): ?>
                         <li class="nav-item dropdown">

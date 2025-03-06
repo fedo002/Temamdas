@@ -25,7 +25,7 @@ include 'includes/header.php';
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="hero-content">
-                    <h1 class="mb-4 display-4">💰 Birlikte Kazan, Birlikte Büyü! 💰</h1>
+                    <h1 class="mb-4 display-4"> Birlikte Kazan, Birlikte Büyü! </h1>
                     <p class="lead mb-4">
                         Sistemimize katılarak hem basit görevler yaparak hem de yatırımlarınızla gelir elde edebilirsiniz!
                     </p>
@@ -47,7 +47,7 @@ include 'includes/header.php';
             </div>
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="hero-image text-center">
-                    <img src="assets/images/hero-image.png" alt="Kazanç Platformu" class="img-fluid">
+                    <img src="assets/images/hero-image2.png" alt="Kazanç Platformu" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -315,7 +315,7 @@ include 'includes/header.php';
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
-                <h2 class="mb-4">🚀 Siz de bu kazançlı ekosisteme katılın ve birlikte büyüyelim!</h2>
+                <h2 class="mb-4"> Siz de bu kazançlı ekosisteme katılın ve birlikte büyüyelim!</h2>
                 <p class="lead mb-4">Hemen üye olun ve kazanmaya başlayın!</p>
                 <?php if(!isset($_SESSION['user_id'])): ?>
                 <div class="cta-buttons">

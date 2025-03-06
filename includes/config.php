@@ -46,3 +46,20 @@ if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.
 // Gerekli dosyaları dahil et
 require_once 'db.php';
 require_once 'functions.php';
+
+// Veritabanı bağlantısı fonksiyonu - includes/config.php içine ekleyin
+function dbConnect() {
+    static $conn;
+    
+    if ($conn === null) {
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        
+        if ($conn->connect_error) {
+            die("Veritabanı bağlantısı başarısız: " . $conn->connect_error);
+        }
+        
+        $conn->set_charset("utf8mb4");
+    }
+    
+    return $conn;
+}

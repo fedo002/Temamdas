@@ -24,10 +24,19 @@ if ($game_settings['daily_game_active'] != '1') {
     exit;
 }
 
+
+
 // Günlük kalan deneme hakkını kontrol et
-$daily_attempts = getUserDailyAttempts($user_id);
+$attempts_info = getUserDailyAttempts($user_id);
 $max_attempts = $vip_details['daily_game_limit'];
-$remaining_attempts = $max_attempts - intval($daily_attempts);
+
+// Eğer hata varsa varsayılan olarak 5 hak verelim
+if ($attempts_info['error']) {
+    $remaining_attempts = $max_attempts;
+} else {
+    $remaining_attempts = $attempts_info['remaining_attempts'];
+}
+
 
 // VIP seviyesine göre ödül ve şans değerlerini hesapla
 $vip_bonus_multiplier = floatval($game_settings['vip_bonus_multiplier']);
@@ -157,9 +166,9 @@ include 'includes/header.php';
             <h3>Aşama 3: Şansını Dene!</h3>
             <p>Üç karttan birini seç ve kazancını katla!</p>
             <p>Olası Ödüller: 
-                <span class="badge bg-secondary"><?= number_format($stage2_rewards['low'], 2) ?> USDT (<?= number_format($stage2_chances['low'] * 100, 0) ?>%)</span>
-                <span class="badge bg-primary"><?= number_format($stage2_rewards['medium'], 2) ?> USDT (<?= number_format($stage2_chances['medium'] * 100, 0) ?>%)</span>
-                <span class="badge bg-warning"><?= number_format($stage2_rewards['high'], 2) ?> USDT (<?= number_format($stage2_chances['high'] * 100, 0) ?>%)</span>
+                <span class="badge bg-secondary"><?= number_format($stage2_rewards['low'], 2) ?> USDT</span>
+                <span class="badge bg-primary"><?= number_format($stage2_rewards['medium'], 2) ?> USDT</span>
+                <span class="badge bg-warning"><?= number_format($stage2_rewards['high'], 2) ?> USDT</span>
             </p>
         </div>
         
@@ -273,16 +282,71 @@ let gameState = {
     }
 };
 
-// Kartları seçme ve döndürme işlevleri
 function selectCard(cardId) {
     if (gameState.stage !== 1 || gameState.selectedCard !== null) return;
     
     gameState.selectedCard = cardId;
     
-    // Simüle edilmiş AJAX - gerçek uygulamada bunu AJAX çağrısıyla değiştirin
-    simulateCardResult(cardId);
+    // Kartı çevir
+    document.getElementById(cardId).classList.add('flipped');
+    
+    // AJAX ile sunucudan sonuç al
+    fetch('ajax/play_game.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'stage=1&card=' + cardId
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Server response:", data); // Debugging
+        
+        if (data.status === 'win') {
+            // Kazanç göster
+            document.getElementById(cardId + '-result').innerHTML = `
+                <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
+                <h3 class="text-success">${gameState.stageOneReward} USDT Kazandın!</h3>
+            `;
+            
+            // İkinci aşamayı göster
+            setTimeout(() => {
+                document.getElementById('stage1').style.display = 'none';
+                document.getElementById('stage2').style.display = 'block';
+                gameState.stage = 2;
+                gameState.reward = gameState.stageOneReward;
+            }, 1500);
+        } else {
+            // Kaybetme mesajı
+            document.getElementById(cardId + '-result').innerHTML = `
+                <i class="fas fa-redo fa-3x text-danger mb-3"></i>
+                <h3 class="text-danger">Tekrar Dene!</h3>
+            `;
+            
+            // Modal göster
+            setTimeout(() => {
+                document.getElementById('resultModalTitle').textContent = 'Üzgünüz!';
+                document.getElementById('resultContent').innerHTML = `
+                    <i class="fas fa-redo fa-4x text-danger mb-3"></i>
+                    <h3>Bu sefer olmadı!</h3>
+                    <p>Şansını tekrar deneyebilirsin. Kalan hakkın: ${data.remaining_attempts}</p>
+                `;
+                
+                // Modal göster
+                new bootstrap.Modal(document.getElementById('resultModal')).show();
+                
+                // Sayfa yenileme
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+            }, 1500);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+    });
 }
-
 function simulateCardResult(cardId) {
     // Random sonuç - gerçek uygulamada sunucudan gelecek
     const winProbability = <?= $stage1_win_chance ?>; // VIP seviyesine göre değişir
@@ -338,32 +402,51 @@ function simulateCardResult(cardId) {
     }, 500); // Kart dönme efekti için biraz gecikme
 }
 
-function takePrize() {
-    // Ödülü al
-    // Gerçek uygulamada AJAX çağrısı yapılır
-    
-    // Modal göster
-    document.getElementById('resultModalTitle').textContent = 'Tebrikler!';
-    document.getElementById('resultContent').innerHTML = `
-        <i class="fas fa-trophy fa-4x text-warning mb-3"></i>
-        <h3>${gameState.reward} USDT Kazandın!</h3>
-        <p>Kazancın hesabına eklendi.</p>
-    `;
-    
-    // Modal göster
-    new bootstrap.Modal(document.getElementById('resultModal')).show();
-    
-    // Sayfa yenileme
-    setTimeout(() => {
-        window.location.reload();
-    }, 3000);
-}
 
 function doubleOrNothing() {
     // 3. aşamaya geç
     document.getElementById('stage2').style.display = 'none';
     document.getElementById('stage3').style.display = 'block';
     gameState.stage = 3;
+}
+
+function takePrize() {
+    // Ödülü al
+    fetch('ajax/play_game.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'stage=2&action=take&amount=' + gameState.reward
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Take prize response:", data); // Debug için
+
+        if (data.status === 'success') {
+            // Modal göster
+            document.getElementById('resultModalTitle').textContent = 'Tebrikler!';
+            document.getElementById('resultContent').innerHTML = `
+                <i class="fas fa-trophy fa-4x text-warning mb-3"></i>
+                <h3>${gameState.reward} USDT Kazandın!</h3>
+                <p>Kazancın hesabına eklendi.</p>
+            `;
+            
+            // Modal göster
+            new bootstrap.Modal(document.getElementById('resultModal')).show();
+            
+            // Sayfa yenileme
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000);
+        } else {
+            alert('Hata: ' + (data.message || 'Bilinmeyen bir hata oluştu.'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+    });
 }
 
 function selectFinalCard(cardId) {
@@ -377,83 +460,100 @@ function selectFinalCard(cardId) {
     // Seçilen kartı çevir
     document.getElementById(cardId).classList.add('flipped');
     
-    // Ödül belirle - VIP seviyesine göre şanslar ayarlanabilir
-    let reward;
-    const random = Math.random();
+    // Debug için konsola yazdırma
+    console.log("Selecting final card:", cardId);
     
-    // VIP seviyesine göre şansları uygula
-    if (random < gameState.stageChances.low) {
-        reward = gameState.stageRewards.low; // Düşük ödül
-    } else if (random < gameState.stageChances.low + gameState.stageChances.medium) {
-        reward = gameState.stageRewards.medium; // Orta ödül
-    } else {
-        reward = gameState.stageRewards.high; // Yüksek ödül
-    }
-    
-    setTimeout(() => {
-        // Seçilen kartın sonucunu göster
-        let resultHTML;
-        if (reward === gameState.stageRewards.low) {
-            resultHTML = `
-                <i class="fas fa-coins fa-3x text-secondary mb-3"></i>
-                <h3>${reward.toFixed(2)} USDT</h3>
-            `;
-        } else if (reward === gameState.stageRewards.medium) {
-            resultHTML = `
-                <i class="fas fa-coins fa-3x text-primary mb-3"></i>
-                <h3>${reward.toFixed(2)} USDT</h3>
-            `;
-        } else {
-            resultHTML = `
-                <i class="fas fa-crown fa-3x text-warning mb-3"></i>
-                <h3 class="text-success">${reward.toFixed(2)} USDT</h3>
-            `;
+    // AJAX ile sunucudan sonuç al
+    fetch('ajax/play_game.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'stage=3&card=' + cardId
+    })
+    .then(response => {
+        console.log("Raw response:", response);
+        return response.json();
+    })
+    .then(data => {
+        console.log("Final card response:", data); // Debug için
+        
+        if (data.status === 'error') {
+            alert('Hata: ' + data.message);
+            return;
         }
         
-        // Sonucu göster
-        document.getElementById(cardId + '-result').innerHTML = resultHTML;
-        
-        // Diğer kartları da çevir ve içeriklerini göster (kullanıcının neyi kaçırdığını göstermek için)
         setTimeout(() => {
-            // Diğer kartları da çevir
-            document.querySelectorAll('#stage3 .game-card').forEach(card => {
-                if (!card.classList.contains('flipped')) {
-                    card.classList.add('flipped');
-                    
-                    // Rastgele değerler göster
-                    const otherCardResult = card.querySelector('.card-result');
-                    if (Math.random() > 0.5) {
-                        otherCardResult.innerHTML = `
-                            <i class="fas fa-coins fa-3x text-secondary mb-3"></i>
-                            <h3>${gameState.stageRewards.low.toFixed(2)} USDT</h3>
-                        `;
-                    } else {
-                        otherCardResult.innerHTML = `
-                            <i class="fas fa-coins fa-3x text-primary mb-3"></i>
-                            <h3>${gameState.stageRewards.medium.toFixed(2)} USDT</h3>
-                        `;
-                    }
-                }
-            });
+            // Seçilen kartın sonucunu göster
+            let resultHTML;
+            const prize = parseFloat(data.prize);
             
-            // Modal göster
-            setTimeout(() => {
-                document.getElementById('resultModalTitle').textContent = 'Tebrikler!';
-                document.getElementById('resultContent').innerHTML = `
-                    <i class="fas fa-trophy fa-4x text-warning mb-3"></i>
-                    <h3>${reward.toFixed(2)} USDT Kazandın!</h3>
-                    <p>Kazancın hesabına eklendi.</p>
+            if (prize <= gameState.stageRewards.low) {
+                resultHTML = `
+                    <i class="fas fa-coins fa-3x text-secondary mb-3"></i>
+                    <h3>${prize.toFixed(2)} USDT</h3>
                 `;
+            } else if (prize <= gameState.stageRewards.medium) {
+                resultHTML = `
+                    <i class="fas fa-coins fa-3x text-primary mb-3"></i>
+                    <h3>${prize.toFixed(2)} USDT</h3>
+                `;
+            } else {
+                resultHTML = `
+                    <i class="fas fa-crown fa-3x text-warning mb-3"></i>
+                    <h3 class="text-success">${prize.toFixed(2)} USDT</h3>
+                `;
+            }
+            
+            // Sonucu göster
+            document.getElementById(cardId + '-result').innerHTML = resultHTML;
+            
+            // Diğer kartları da çevir ve içeriklerini göster
+            setTimeout(() => {
+                // Diğer kartları da çevir
+                document.querySelectorAll('#stage3 .game-card').forEach(card => {
+                    if (!card.classList.contains('flipped')) {
+                        card.classList.add('flipped');
+                        
+                        // Rastgele değerler göster
+                        const otherCardResult = card.querySelector('.card-result');
+                        if (Math.random() > 0.5) {
+                            otherCardResult.innerHTML = `
+                                <i class="fas fa-coins fa-3x text-secondary mb-3"></i>
+                                <h3>${gameState.stageRewards.low.toFixed(2)} USDT</h3>
+                            `;
+                        } else {
+                            otherCardResult.innerHTML = `
+                                <i class="fas fa-coins fa-3x text-primary mb-3"></i>
+                                <h3>${gameState.stageRewards.medium.toFixed(2)} USDT</h3>
+                            `;
+                        }
+                    }
+                });
                 
-                new bootstrap.Modal(document.getElementById('resultModal')).show();
-                
-                // Sayfa yenileme
+                // Modal göster
                 setTimeout(() => {
-                    window.location.reload();
-                }, 3000);
-            }, 1500);
-        }, 1000);
-    }, 500);
+                    document.getElementById('resultModalTitle').textContent = 'Tebrikler!';
+                    document.getElementById('resultContent').innerHTML = `
+                        <i class="fas fa-trophy fa-4x text-warning mb-3"></i>
+                        <h3>${prize.toFixed(2)} USDT Kazandın!</h3>
+                        <p>Kazancın hesabına eklendi.</p>
+                    `;
+                    
+                    new bootstrap.Modal(document.getElementById('resultModal')).show();
+                    
+                    // Sayfa yenileme
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 3000);
+                }, 1500);
+            }, 1000);
+        }, 500);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+    });
 }
 </script>
 

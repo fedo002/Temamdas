@@ -5,7 +5,7 @@
             <div class="col-lg-4 mb-4 mb-lg-0">
                 <div class="footer-about">
                     <div class="footer-logo mb-3">
-                        <h3>💰 Kazanç Platformu</h3>
+                        <h3>Kazanç Platformu</h3>
                     </div>
                     <p>
                         Birlikte Kazan, Birlikte Büyü! Sistemimize katılarak hem basit görevler yaparak hem de yatırımlarınızla gelir elde edebilirsiniz.
@@ -61,7 +61,7 @@
                 <div class="mt-4">
                     <h5 class="footer-title">Ödeme Yöntemi</h5>
                     <div class="payment-methods">
-                        <img src="assets/images/usdt-trc20.png" alt="USDT TRC-20" height="40">
+                        <img src="assets/images/usdt-trc20.png" alt="USDT TRC-20" height="40">USDT TRC-20
                     </div>
                 </div>
             </div>
