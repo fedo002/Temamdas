@@ -48,6 +48,8 @@
             color: white;
         }
     </style>
+    <link rel="stylesheet" href="assets/css/translation-system.css">
+    <script src="assets/js/translation-system.js"></script>
 </head>
 <body>
 <!-- header.php dosyasına çeviri düğmesi ekleyelim -->
@@ -58,25 +60,6 @@
             <?= APP_NAME ?>
         </a>
         
-        <!-- Çeviri düğmesi ekleyelim (mobil görünüm için) -->
-        <div class="translate-button d-flex d-lg-none me-2">
-            <div class="dropdown">
-                <a class="btn btn-sm btn-outline-light dropdown-toggle" href="#" role="button" id="translateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-language"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="translateDropdown">
-                    <li><a class="dropdown-item" href="#" onclick="changeLanguage('tr')">Türkçe</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="changeLanguage('de')">Deutsch</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="changeLanguage('es')">Español</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="changeLanguage('fr')">Français</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
@@ -91,6 +74,7 @@
                     <li class="nav-item">
                         <a class="nav-link <?= ($page_title == 'VIP Paketleri' || $page_title == 'Mining Paketleri') ? 'active' : '' ?>" href="packages.php">Paketler</a>
                     </li>
+                        
                     
                     <?php if(isset($_SESSION['user_id'])): ?>
                         <li class="nav-item dropdown">
@@ -115,19 +99,22 @@
                             <a class="nav-link btn btn-sm btn-outline-light ms-2 px-3" href="register.php">Kayıt Ol</a>
                         </li>
                     <?php endif; ?>
-                <!-- Çeviri düğmesi ekleyelim (masaüstü görünüm için) -->
-                <li class="nav-item dropdown d-none d-lg-block">
-                    <a class="nav-link dropdown-toggle" href="#" id="translateDropdownLg" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-language me-1"></i> Dil
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="translateDropdownLg">
-                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('tr')">Türkçe</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('de')">Deutsch</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('es')">Español</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="changeLanguage('fr')">Français</a></li>
-                    </ul>
-                </li>
+                        <li class="nav-item language-nav-item">
+                            <div class="language-selector">
+                                <button class="lang-toggle">
+                                    <span class="current-lang">TR</span>
+                                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <div class="lang-dropdown">
+                                    <button class="lang-option" data-lang="tr">TR</button>
+                                    <button class="lang-option" data-lang="en">EN</button>
+                                    <button class="lang-option" data-lang="de">DE</button>
+                                    <button class="lang-option" data-lang="fr">FR</button>
+                                </div>
+                            </div>
+                        </li>
             </ul>
         </div>
     </div>

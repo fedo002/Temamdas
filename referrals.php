@@ -1,17 +1,21 @@
 <?php
 // referrals.php - Referral system main page
 require_once 'includes/config.php';
-require_once 'includes/auth.php';
+require_once 'includes/functions.php';
 require_once 'includes/header.php';
 
-// Redirect to login if not logged in
-if (!isLoggedIn()) {
-    header('Location: login.php?redirect=referrals.php');
+// Kullanıcı oturum kontrolü
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
     exit;
 }
 
-// Get user ID from session
-$userId = $_SESSION['user_id'];
+
+
+// Kullanıcı bilgilerini al
+$user_id = $_SESSION['user_id'];
+$user = getUserDetails($user_id);
+$vip_details = getVipDetails($user['vip_level']);
 
 // Generate referral code if not exists
 $stmt = $conn->prepare("SELECT referral_code FROM users WHERE id = ?");
