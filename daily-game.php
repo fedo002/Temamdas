@@ -13,14 +13,32 @@ if(!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $user = getUserDetails($user_id);
 $vip_level = $user['vip_level'];
-
-$daily_attempts = getUserDailyAttempts($user_id);
 $vip_details = getVipDetails($vip_level);
+
+
+// Günlük kalan deneme hakkını kontrol et
+$daily_attempts = getUserDailyAttempts($user_id);
 $max_attempts = $vip_details['daily_game_limit'];
 
-$remaining_attempts = max(0, $max_attempts - $daily_attempts['used_attempts']);
+// $daily_attempts'in sayı olduğundan emin olalım
+$daily_attempts = intval($daily_attempts);
+$remaining_attempts = $max_attempts - $daily_attempts;
 
+// VIP seviyesine göre ödül ve şans değerlerini al
+$stage1_base_reward = 5; // Temel 1. aşama ödülü
+$stage1_win_chance = $vip_details['game_max_win_chance']; // VIP seviyesine göre kazanma şansı
 
+$stage2_rewards = [
+    'low' => 3 + ($vip_level * 0.5), // VIP seviyesi arttıkça düşük ödül de artar
+    'medium' => 7 + ($vip_level * 1), // VIP seviyesi arttıkça orta ödül de artar
+    'high' => 10 + ($vip_level * 2)   // VIP seviyesi arttıkça yüksek ödül de artar
+];
+
+$stage2_chances = [
+    'low' => 0.60 - ($vip_level * 0.05), // VIP seviyesi arttıkça düşük ödül şansı azalır
+    'medium' => 0.25,
+    'high' => 0.15 + ($vip_level * 0.05) // VIP seviyesi arttıkça yüksek ödül şansı artar
+];
 
 $page_title = 'Günlük Ödül Oyunu';
 include 'includes/header.php';
@@ -38,7 +56,7 @@ include 'includes/header.php';
                             <i class="fas fa-gamepad me-2"></i> Kalan Hak: <strong><?= $remaining_attempts ?></strong>
                         </div>
                         <div class="stat-badge">
-                            <i class="fas fa-trophy me-2"></i> Kazanma Şansı: <strong><?= ($vip_details['game_max_win_chance'] * 100) ?>%</strong>
+                            <i class="fas fa-trophy me-2"></i> Kazanma Şansı: <strong><?= number_format($stage1_win_chance * 100, 1) ?>%</strong>
                         </div>
                     </div>
                 </div>
@@ -54,8 +72,8 @@ include 'includes/header.php';
             <p>İki karttan birini seç. Şansını dene!</p>
         </div>
         
-    <div class="col-md-6">
-        <div class="game-card" id="card1" onclick="selectCard('card1')">
+        <div class="col-md-6">
+            <div class="game-card" id="card1" onclick="selectCard('card1')">
                 <div class="game-card-inner">
                     <div class="game-card-front">
                         <div class="text-center">
@@ -71,8 +89,9 @@ include 'includes/header.php';
                 </div>
             </div>
         </div>
+        
         <div class="col-md-6">
-        <div class="game-card" id="card2" onclick="selectCard('card2')">
+            <div class="game-card" id="card2" onclick="selectCard('card2')">
                 <div class="game-card-inner">
                     <div class="game-card-front">
                         <div class="text-center">
@@ -94,7 +113,7 @@ include 'includes/header.php';
     <div class="row mb-5" id="stage2" style="display: none;">
         <div class="col-12 mb-4 text-center">
             <h3>Aşama 2: Ödülünü Kat!</h3>
-            <p>5 USDT'yi çekebilir veya daha fazla kazanmak için şansını deneyebilirsin!</p>
+            <p><span id="stage1-reward"><?= $stage1_base_reward ?></span> USDT'yi çekebilir veya daha fazla kazanmak için şansını deneyebilirsin!</p>
         </div>
         
         <div class="col-md-6 mx-auto">
@@ -102,10 +121,9 @@ include 'includes/header.php';
                 <div class="card-body">
                     <h4 class="mb-3">Ne yapmak istersin?</h4>
                     <div class="d-flex gap-3 justify-content-center">
-                        <button class="btn btn-success" onclick="takePrize()" id="take-prize-btn">
-                            <i class="fas fa-check-circle me-2"></i> <?= $gameState['stageOneReward'] ?> USDT'yi Al
+                        <button class="btn btn-success" onclick="takePrize()">
+                            <i class="fas fa-check-circle me-2"></i> <span id="stage1-reward-btn"><?= $stage1_base_reward ?></span> USDT'yi Al
                         </button>
-
                         <button class="btn btn-warning" onclick="doubleOrNothing()">
                             <i class="fas fa-dice me-2"></i> Şansını Dene
                         </button>
@@ -120,6 +138,11 @@ include 'includes/header.php';
         <div class="col-12 mb-4 text-center">
             <h3>Aşama 3: Şansını Dene!</h3>
             <p>Üç karttan birini seç ve kazancını katla!</p>
+            <p>Olası Ödüller: 
+                <span class="badge bg-secondary"><?= number_format($stage2_rewards['low'], 2) ?> USDT (<?= number_format($stage2_chances['low'] * 100, 0) ?>%)</span>
+                <span class="badge bg-primary"><?= number_format($stage2_rewards['medium'], 2) ?> USDT (<?= number_format($stage2_chances['medium'] * 100, 0) ?>%)</span>
+                <span class="badge bg-warning"><?= number_format($stage2_rewards['high'], 2) ?> USDT (<?= number_format($stage2_chances['high'] * 100, 0) ?>%)</span>
+            </p>
         </div>
         
         <div class="col-md-4">
@@ -213,115 +236,207 @@ include 'includes/header.php';
 </div>
 
 <script>
+// Oyun Mekanizması JavaScript Kodları
 let gameState = {
     stage: 1,
     selectedCard: null,
-    stageOneReward: 10, // USDT
-    reward: 10 // İlk aşamada kazanılan miktar
+    stageOneReward: <?= $stage1_base_reward ?>, // USDT
+    reward: 0,
+    vipLevel: <?= $vip_level ?>,
+    stageRewards: {
+        low: <?= $stage2_rewards['low'] ?>,
+        medium: <?= $stage2_rewards['medium'] ?>,
+        high: <?= $stage2_rewards['high'] ?>
+    },
+    stageChances: {
+        low: <?= $stage2_chances['low'] ?>,
+        medium: <?= $stage2_chances['medium'] ?>,
+        high: <?= $stage2_chances['high'] ?>
+    }
 };
 
+// Kartları seçme ve döndürme işlevleri
 function selectCard(cardId) {
-    if (gameState.stage !== 1) return;
+    if (gameState.stage !== 1 || gameState.selectedCard !== null) return;
     
     gameState.selectedCard = cardId;
-    let card = document.getElementById(cardId);
-    card.classList.add('flipped');
     
-    fetch('ajax/play_game.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'stage=1&card=' + cardId
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Stage 1 Response:', data);
-        
-        if (data.status === 'win') {
+    // Simüle edilmiş AJAX - gerçek uygulamada bunu AJAX çağrısıyla değiştirin
+    simulateCardResult(cardId);
+}
+
+function simulateCardResult(cardId) {
+    // Random sonuç - gerçek uygulamada sunucudan gelecek
+    const winProbability = <?= $stage1_win_chance ?>; // VIP seviyesine göre değişir
+    const isWinner = Math.random() < winProbability;
+    
+    // Kartı çevir
+    document.getElementById(cardId).classList.add('flipped');
+    
+    setTimeout(() => {
+        if (isWinner) {
+            // Kazanç göster
             document.getElementById(cardId + '-result').innerHTML = `
                 <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
-                <h3 class="text-success">${data.win_amount} USDT Kazandın!</h3>
-                <p>Sonuç: ${data.result}</p>
+                <h3 class="text-success">${gameState.stageOneReward} USDT Kazandın!</h3>
             `;
             
+            // İkinci aşamayı göster
             setTimeout(() => {
                 document.getElementById('stage1').style.display = 'none';
-                document.getElementById('stage2').style.display = 'flex';
+                document.getElementById('stage2').style.display = 'block';
                 gameState.stage = 2;
-                gameState.reward = data.win_amount;
-                gameState.stageOneReward = data.win_amount;
+                gameState.reward = gameState.stageOneReward;
+                
+                // Update the reward text in stage 2
+                document.getElementById('stage1-reward').textContent = gameState.stageOneReward;
+                document.getElementById('stage1-reward-btn').textContent = gameState.stageOneReward;
             }, 1500);
         } else {
+            // Kaybetme mesajı
             document.getElementById(cardId + '-result').innerHTML = `
                 <i class="fas fa-redo fa-3x text-danger mb-3"></i>
                 <h3 class="text-danger">Tekrar Dene!</h3>
-                <p>Sonuç: ${data.result}</p>
             `;
+            
+            // Modal göster
+            setTimeout(() => {
+                document.getElementById('resultModalTitle').textContent = 'Üzgünüz!';
+                document.getElementById('resultContent').innerHTML = `
+                    <i class="fas fa-redo fa-4x text-danger mb-3"></i>
+                    <h3>Bu sefer olmadı!</h3>
+                    <p>Şansını tekrar deneyebilirsin. Kalan hakkın: ${<?= $remaining_attempts ?> - 1}</p>
+                `;
+                
+                // Modal göster
+                new bootstrap.Modal(document.getElementById('resultModal')).show();
+                
+                // Sayfa yenileme
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+            }, 1500);
         }
-    })
-    .catch(error => console.error('Error:', error));
+    }, 500); // Kart dönme efekti için biraz gecikme
 }
 
 function takePrize() {
-    fetch('ajax/play_game.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'stage=2&action=take&amount=' + gameState.reward
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('resultModalTitle').textContent = 'Tebrikler!';
-        document.getElementById('resultContent').innerHTML = `
-            <i class="fas fa-trophy fa-4x text-warning mb-3"></i>
-            <h3>${gameState.reward} USDT Kazandın!</h3>
-            <p>Kazancın hesabına eklendi.</p>
-        `;
-        new bootstrap.Modal(document.getElementById('resultModal')).show();
-        setTimeout(() => { window.location.reload(); }, 3000);
-    });
+    // Ödülü al
+    // Gerçek uygulamada AJAX çağrısı yapılır
+    
+    // Modal göster
+    document.getElementById('resultModalTitle').textContent = 'Tebrikler!';
+    document.getElementById('resultContent').innerHTML = `
+        <i class="fas fa-trophy fa-4x text-warning mb-3"></i>
+        <h3>${gameState.reward} USDT Kazandın!</h3>
+        <p>Kazancın hesabına eklendi.</p>
+    `;
+    
+    // Modal göster
+    new bootstrap.Modal(document.getElementById('resultModal')).show();
+    
+    // Sayfa yenileme
+    setTimeout(() => {
+        window.location.reload();
+    }, 3000);
 }
 
 function doubleOrNothing() {
-    if (gameState.stage !== 2) return;
+    // 3. aşamaya geç
     document.getElementById('stage2').style.display = 'none';
-    document.getElementById('stage3').style.display = 'flex';
+    document.getElementById('stage3').style.display = 'block';
     gameState.stage = 3;
 }
 
 function selectFinalCard(cardId) {
     if (gameState.stage !== 3) return;
     
-    let selectedCard = document.getElementById(cardId);
-    selectedCard.classList.add('flipped');
-    
-    fetch('ajax/play_game.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'stage=3&card=' + cardId
-    })
-    .then(response => response.json())
-    .then(data => {
-        const resultContent = {
-            3: `<i class="fas fa-coins fa-3x text-warning mb-3"></i><h3>3 USDT</h3>`,
-            7: `<i class="fas fa-coins fa-3x text-warning mb-3"></i><h3>7 USDT</h3>`,
-            10: `<i class="fas fa-crown fa-3x text-warning mb-3"></i><h3 class="text-success">10 USDT</h3>`
-        };
-        
-        document.getElementById(cardId + '-result').innerHTML = resultContent[data.prize];
-        
-        setTimeout(() => {
-            document.getElementById('resultModalTitle').textContent = 'Tebrikler!';
-            document.getElementById('resultContent').innerHTML = `
-                <i class="fas fa-trophy fa-4x text-warning mb-3"></i>
-                <h3>${data.prize} USDT Kazandın!</h3>
-                <p>Kazancın hesabına eklendi.</p>
-            `;
-            new bootstrap.Modal(document.getElementById('resultModal')).show();
-            setTimeout(() => { window.location.reload(); }, 3000);
-        }, 2000);
+    // Tüm kartları devre dışı bırak
+    document.querySelectorAll('#stage3 .game-card').forEach(card => {
+        card.style.pointerEvents = 'none';
     });
+    
+    // Seçilen kartı çevir
+    document.getElementById(cardId).classList.add('flipped');
+    
+    // Ödül belirle - VIP seviyesine göre şanslar ayarlanabilir
+    let reward;
+    const random = Math.random();
+    
+    // VIP seviyesine göre şansları uygula
+    if (random < gameState.stageChances.low) {
+        reward = gameState.stageRewards.low; // Düşük ödül
+    } else if (random < gameState.stageChances.low + gameState.stageChances.medium) {
+        reward = gameState.stageRewards.medium; // Orta ödül
+    } else {
+        reward = gameState.stageRewards.high; // Yüksek ödül
+    }
+    
+    setTimeout(() => {
+        // Seçilen kartın sonucunu göster
+        let resultHTML;
+        if (reward === gameState.stageRewards.low) {
+            resultHTML = `
+                <i class="fas fa-coins fa-3x text-secondary mb-3"></i>
+                <h3>${reward.toFixed(2)} USDT</h3>
+            `;
+        } else if (reward === gameState.stageRewards.medium) {
+            resultHTML = `
+                <i class="fas fa-coins fa-3x text-primary mb-3"></i>
+                <h3>${reward.toFixed(2)} USDT</h3>
+            `;
+        } else {
+            resultHTML = `
+                <i class="fas fa-crown fa-3x text-warning mb-3"></i>
+                <h3 class="text-success">${reward.toFixed(2)} USDT</h3>
+            `;
+        }
+        
+        // Sonucu göster
+        document.getElementById(cardId + '-result').innerHTML = resultHTML;
+        
+        // Diğer kartları da çevir ve içeriklerini göster (kullanıcının neyi kaçırdığını göstermek için)
+        setTimeout(() => {
+            // Diğer kartları da çevir
+            document.querySelectorAll('#stage3 .game-card').forEach(card => {
+                if (!card.classList.contains('flipped')) {
+                    card.classList.add('flipped');
+                    
+                    // Rastgele değerler göster
+                    const otherCardResult = card.querySelector('.card-result');
+                    if (Math.random() > 0.5) {
+                        otherCardResult.innerHTML = `
+                            <i class="fas fa-coins fa-3x text-secondary mb-3"></i>
+                            <h3>${gameState.stageRewards.low.toFixed(2)} USDT</h3>
+                        `;
+                    } else {
+                        otherCardResult.innerHTML = `
+                            <i class="fas fa-coins fa-3x text-primary mb-3"></i>
+                            <h3>${gameState.stageRewards.medium.toFixed(2)} USDT</h3>
+                        `;
+                    }
+                }
+            });
+            
+            // Modal göster
+            setTimeout(() => {
+                document.getElementById('resultModalTitle').textContent = 'Tebrikler!';
+                document.getElementById('resultContent').innerHTML = `
+                    <i class="fas fa-trophy fa-4x text-warning mb-3"></i>
+                    <h3>${reward.toFixed(2)} USDT Kazandın!</h3>
+                    <p>Kazancın hesabına eklendi.</p>
+                `;
+                
+                new bootstrap.Modal(document.getElementById('resultModal')).show();
+                
+                // Sayfa yenileme
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+            }, 1500);
+        }, 1000);
+    }, 500);
 }
 </script>
-
-
 
 <?php include 'includes/footer.php'; ?>
