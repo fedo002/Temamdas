@@ -546,9 +546,10 @@ function getUserDailyAttempts($user_id) {
 
 // Oyun ayarlarını getir
 function getGameSettings() {
-    $conn = dbConnect();
+    global $db;
     $settings = [];
     
+    $conn = $db->getConnection();
     $result = $conn->query("SELECT * FROM game_settings");
     
     if ($result && $result->num_rows > 0) {
