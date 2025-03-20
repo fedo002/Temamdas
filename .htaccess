@@ -1,0 +1,46 @@
+# Main .htaccess file with Linguise API integration
+
+# Protect the .htaccess file
+<Files .htaccess>
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Protect sensitive files
+<FilesMatch "^(\.env|composer\.json|composer\.lock|package\.json|package-lock\.json|config\.php)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Enable rewrite engine and Linguise API redirection
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Linguise API language redirects - Provided by Linguise
+    RewriteRule ^(af|sq|am|ar|hy|az|eu|be|bn|bs|bg|ca|ceb|ny|zh-cn|zh-tw|co|hr|cs|da|nl|en|eo|et|tl|fi|fr|fy|gl|ka|de|el|gu|ht|ha|haw|iw|hi|hmn|hu|is|ig|id|ga|it|ja|jw|kn|kk|km|ko|ku|ky|lo|la|lv|lt|lb|mk|mg|ms|ml|mt|mi|mr|mn|my|ne|no|ps|fa|pl|pt|pa|ro|ru|sm|gd|sr|st|sn|sd|si|sk|sl|so|es|su|sw|sv|tg|ta|te|th|tr|uk|ur|uz|vi|cy|xh|yi|yo|zu|zz-zz)(?:$|/)(.*)$ linguise/linguise.php?linguise_language=$1&original_url=$2 [L,QSA]
+    
+    # Prevent directory listing
+    Options -Indexes
+    
+    # Handle 404 errors
+    ErrorDocument 404 /404.php
+    
+    # Handle 500 errors
+    ErrorDocument 500 /500.php
+    
+    # Block access to hidden files and directories
+    RewriteCond %{SCRIPT_FILENAME} -d [OR]
+    RewriteCond %{SCRIPT_FILENAME} -f
+    RewriteRule "(^|/)\." - [F]
+    
+    # Prevent access to specific directories
+    RewriteRule ^(includes|vendor|logs)/ - [F,L]
+</IfModule>
+
+# Telegram Support Bot API Redirects
+<IfModule mod_rewrite.c>
+    # tgsupport/api için özel yönlendirmeler
+    RewriteRule ^tgsupport/api/?$ tgsupport/api/index.php [L]
+    RewriteRule ^tgsupport/api/([^/]+)/?$ tgsupport/api/index.php [QSA,L]
+</IfModule>

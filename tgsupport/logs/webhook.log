@@ -1,0 +1,13 @@
+[2025-03-20 05:26:32] Webhook received: 
+[2025-03-20 05:26:55] Webhook received: {"update_id":505843698,
+"message":{"message_id":68,"from":{"id":1711947689,"is_bot":false,"first_name":"Pranga","username":"PrangA0","language_code":"tr"},"chat":{"id":1711947689,"first_name":"Pranga","username":"PrangA0","type":"private"},"date":1742437615,"text":"."}}
+[2025-03-20 05:26:55] Found ticket_id: T17119476891742436378 for user 1711947689
+[2025-03-20 05:26:56] Webhook received: {"update_id":505843699,
+"message":{"message_id":69,"from":{"id":7990525428,"is_bot":false,"first_name":"Fedo","username":"fedo_00","language_code":"tr"},"chat":{"id":7990525428,"first_name":"Fedo","username":"fedo_00","type":"private"},"date":1742437616,"text":"hi"}}
+[2025-03-20 05:26:56] Found ticket_id: T79905254281742436371 for user 7990525428
+[2025-03-20 05:27:24] Webhook received: {"update_id":505843700,
+"message":{"message_id":70,"from":{"id":1711947689,"is_bot":false,"first_name":"Pranga","username":"PrangA0","language_code":"tr"},"chat":{"id":1711947689,"first_name":"Pranga","username":"PrangA0","type":"private"},"date":1742437644,"text":"jhkghukjgyugyu"}}
+[2025-03-20 05:27:24] Found ticket_id: T17119476891742436378 for user 1711947689
+[2025-03-20 06:29:04] Webhook received: {"update_id":505843701,
+"message":{"message_id":71,"from":{"id":7990525428,"is_bot":false,"first_name":"Fedo","username":"fedo_00","language_code":"tr"},"chat":{"id":7990525428,"first_name":"Fedo","username":"fedo_00","type":"private"},"date":1742441344,"text":"/start","entities":[{"offset":0,"length":6,"type":"bot_command"}]}}
+[2025-03-20 06:29:04] Found ticket_id: T79905254281742436371 for user 7990525428

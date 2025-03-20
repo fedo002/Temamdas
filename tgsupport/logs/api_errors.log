@@ -1,0 +1,33 @@
+[2025-03-20 05:09:15] Request URI: /tgsupport/api/availability, Method: GET
+[2025-03-20 05:09:15] Endpoint: availability
+[2025-03-20 05:09:15] Availability check: Active reps = 1
+[2025-03-20 05:09:24] Request URI: /tgsupport/api/availability, Method: GET
+[2025-03-20 05:09:24] Endpoint: availability
+[2025-03-20 05:09:24] Availability check: Active reps = 1
+[2025-03-20 05:09:27] Request URI: /tgsupport/api/verify, Method: POST
+[2025-03-20 05:09:27] Endpoint: verify
+[2025-03-20 05:09:27] Verify Request Data: {"user_id": 7990525428, "username": "fedo_00", "verification_info": "pranga1"}
+[2025-03-20 05:09:27] Request URI: /tgsupport/api/availability, Method: GET
+[2025-03-20 05:09:27] Endpoint: availability
+[2025-03-20 05:09:27] Availability check: Active reps = 1
+[2025-03-20 05:09:28] Request URI: /tgsupport/api/support_session, Method: POST
+[2025-03-20 05:09:28] Endpoint: support_session
+[2025-03-20 05:09:28] Support Session Request Data: {"action": "create_session", "ticket_id": "T79905254281742436371", "user_id": 7990525428, "status": "waiting"}
+[2025-03-20 05:09:35] Request URI: /tgsupport/api/verify, Method: POST
+[2025-03-20 05:09:35] Endpoint: verify
+[2025-03-20 05:09:35] Verify Request Data: {"user_id": 1711947689, "username": "PrangA0", "verification_info": "paragara"}
+[2025-03-20 05:09:35] Request URI: /tgsupport/api/availability, Method: GET
+[2025-03-20 05:09:35] Endpoint: availability
+[2025-03-20 05:09:35] Availability check: Active reps = 1
+[2025-03-20 05:09:36] Request URI: /tgsupport/api/support_session, Method: POST
+[2025-03-20 05:09:36] Endpoint: support_session
+[2025-03-20 05:09:36] Support Session Request Data: {"action": "create_session", "ticket_id": "T17119476891742436378", "user_id": 1711947689, "status": "waiting"}
+[2025-03-20 05:10:37] Request URI: /tgsupport/api/support_session, Method: POST
+[2025-03-20 05:10:37] Endpoint: support_session
+[2025-03-20 05:10:37] Support Session Request Data: {"action": "update_session", "ticket_id": "T17119476891742436378", "last_message_time": "2025-03-20 06:07:20"}
+[2025-03-20 05:10:39] Request URI: /tgsupport/api/support_session, Method: POST
+[2025-03-20 05:10:39] Endpoint: support_session
+[2025-03-20 05:10:39] Support Session Request Data: {"action": "update_session", "ticket_id": "T17119476891742436378", "last_message_time": "2025-03-20 06:07:22"}
+[2025-03-20 05:12:55] Request URI: /tgsupport/api/support_session, Method: POST
+[2025-03-20 05:12:55] Endpoint: support_session
+[2025-03-20 05:12:55] Support Session Request Data: {"action": "update_session", "ticket_id": "T17119476891742436378", "last_message_time": "2025-03-20 06:09:38"}
