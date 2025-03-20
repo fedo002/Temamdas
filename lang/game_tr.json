@@ -1,0 +1,49 @@
+{
+    "daily_game": {
+      "stage2": {
+        "title": "Kartınızı Seçin",
+        "description": "Ödülünüzü görmek için bir kart seçin!",
+        "possible_rewards": "Olası Ödüller:",
+        "timer_text": "Kart seçmek için kalan süre: {seconds} saniye",
+        "card_prefix": "Kart"
+      },
+      "no_attempts": {
+        "title": "Oyun Hakkınız Kalmadı",
+        "description": "Bugün için tüm oyun haklarınızı kullandınız. Yarın tekrar gelin veya daha fazla hak için VIP seviyenizi yükseltin!",
+        "btn_explore_vip": "VIP Paketlerini İncele"
+      },
+      "modals": {
+        "timeout": {
+          "title": "Süre Doldu!",
+          "message1": "Süre içinde bir kart seçmediniz.",
+          "message2": "En düşük ödül hesabınıza eklendi.",
+          "btn_ok": "Tamam"
+        },
+        "result": {
+          "title": "Tebrikler!",
+          "message": "Ödülünüz hesabınıza eklendi.",
+          "try_again_message": "Daha iyi bir ödül için tekrar deneyebilirsiniz!",
+          "remaining_retries": "Kalan tekrar deneme hakkınız",
+          "btn_ok": "Tamam",
+          "btn_try_again": "Tekrar Dene"
+        },
+        "error": {
+          "title": "Hata",
+          "generic_error": "Bir hata oluştu!",
+          "try_again": "Lütfen daha sonra tekrar deneyin.",
+          "connection_error": "Bağlantı Hatası",
+          "check_connection": "Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin.",
+          "no_attempts": "Günlük limitinize ulaştınız!",
+          "try_tomorrow": "Yarın tekrar gelin.",
+          "btn_ok": "Tamam"
+        },
+        "confirmation": {
+          "title": "Onay İsteği",
+          "try_luck_warning": "Şansınızı denemek isterseniz, oyundan çıkmanız durumunda en düşük ödülü alacaksınız ve hakkınız kullanılmış sayılacaktır. Devam etmek istiyor musunuz?",
+          "btn_confirm": "Tamam",
+          "btn_cancel": "İptal"
+        }
+      },
+      "loading": "Ödülünüz işleniyor..."
+    }
+  }

@@ -1,0 +1,44 @@
+{
+    "daily_game": {
+      "stage2": {
+        "title": "Choose Your Card",
+        "description": "Select a card to see your reward!",
+        "possible_rewards": "Possible Rewards:",
+        "timer_text": "Time to select a card: {seconds} seconds",
+        "card_prefix": "Card"
+      },
+      "modals": {
+        "timeout": {
+          "title": "Time's Up!",
+          "message1": "You didn't select a card within the time limit.",
+          "message2": "The lowest reward has been added to your account.",
+          "btn_ok": "OK"
+        },
+        "result": {
+          "title": "Congratulations!",
+          "message": "Your reward has been added to your account.",
+          "try_again_message": "You can try again for a better reward!",
+          "remaining_retries": "Your remaining retry attempts",
+          "btn_ok": "OK",
+          "btn_try_again": "Try Again"
+        },
+        "error": {
+          "title": "Error",
+          "generic_error": "An error occurred!",
+          "try_again": "Please try again later.",
+          "connection_error": "Connection Error",
+          "check_connection": "Please check your internet connection and try again.",
+          "no_attempts": "Your daily limit is reached!",
+          "try_tomorrow": "Come back tomorrow.",
+          "btn_ok": "OK"
+        },
+        "confirmation": {
+          "title": "Confirmation Request",
+          "try_luck_warning": "If you choose to try your luck, you will receive the lowest reward if you exit the game and your attempt will be counted. Do you want to continue?",
+          "btn_confirm": "OK",
+          "btn_cancel": "Cancel"
+        }
+      },
+      "loading": "Processing your reward..."
+    }
+  }
