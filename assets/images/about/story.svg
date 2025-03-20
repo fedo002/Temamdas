@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Arka plan -->
+  <rect width="800" height="500" fill="#1e1e2e" />
+  
+  <!-- Dekoratif arka plan desenler -->
+  <g opacity="0.2">
+    <path d="M0,50 L800,250 L800,0 L0,0 Z" fill="#6366f1" />
+    <path d="M0,480 L800,320 L800,500 L0,500 Z" fill="#6366f1" />
+  </g>
+  
+  <!-- Blockchain ağ arka planı -->
+  <g opacity="0.15">
+    <!-- Blockchain bağlantı noktaları -->
+    <circle cx="100" cy="100" r="4" fill="#a5b4fc" />
+    <circle cx="200" cy="150" r="4" fill="#a5b4fc" />
+    <circle cx="300" cy="100" r="4" fill="#a5b4fc" />
+    <circle cx="400" cy="200" r="4" fill="#a5b4fc" />
+    <circle cx="500" cy="150" r="4" fill="#a5b4fc" />
+    <circle cx="600" cy="100" r="4" fill="#a5b4fc" />
+    <circle cx="700" cy="150" r="4" fill="#a5b4fc" />
+    
+    <circle cx="150" cy="250" r="4" fill="#a5b4fc" />
+    <circle cx="250" cy="300" r="4" fill="#a5b4fc" />
+    <circle cx="350" cy="350" r="4" fill="#a5b4fc" />
+    <circle cx="450" cy="300" r="4" fill="#a5b4fc" />
+    <circle cx="550" cy="250" r="4" fill="#a5b4fc" />
+    <circle cx="650" cy="300" r="4" fill="#a5b4fc" />
+    
+    <circle cx="100" cy="400" r="4" fill="#a5b4fc" />
+    <circle cx="200" cy="350" r="4" fill="#a5b4fc" />
+    <circle cx="300" cy="400" r="4" fill="#a5b4fc" />
+    <circle cx="400" cy="350" r="4" fill="#a5b4fc" />
+    <circle cx="500" cy="400" r="4" fill="#a5b4fc" />
+    <circle cx="600" cy="350" r="4" fill="#a5b4fc" />
+    <circle cx="700" cy="400" r="4" fill="#a5b4fc" />
+    
+    <!-- Blockchain bağlantı çizgileri -->
+    <line x1="100" y1="100" x2="200" y2="150" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="200" y1="150" x2="300" y2="100" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="300" y1="100" x2="400" y2="200" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="400" y1="200" x2="500" y2="150" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="500" y1="150" x2="600" y2="100" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="600" y1="100" x2="700" y2="150" stroke="#a5b4fc" stroke-width="1" />
+    
+    <line x1="150" y1="250" x2="250" y2="300" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="250" y1="300" x2="350" y2="350" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="350" y1="350" x2="450" y2="300" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="450" y1="300" x2="550" y2="250" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="550" y1="250" x2="650" y2="300" stroke="#a5b4fc" stroke-width="1" />
+    
+    <line x1="100" y1="400" x2="200" y2="350" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="200" y1="350" x2="300" y2="400" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="300" y1="400" x2="400" y2="350" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="400" y1="350" x2="500" y2="400" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="500" y1="400" x2="600" y2="350" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="600" y1="350" x2="700" y2="400" stroke="#a5b4fc" stroke-width="1" />
+    
+    <line x1="100" y1="100" x2="150" y2="250" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="200" y1="150" x2="250" y2="300" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="300" y1="100" x2="350" y2="350" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="400" y1="200" x2="450" y2="300" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="500" y1="150" x2="550" y2="250" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="600" y1="100" x2="650" y2="300" stroke="#a5b4fc" stroke-width="1" />
+    
+    <line x1="150" y1="250" x2="100" y2="400" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="250" y1="300" x2="200" y2="350" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="350" y1="350" x2="300" y2="400" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="450" y1="300" x2="400" y2="350" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="550" y1="250" x2="500" y2="400" stroke="#a5b4fc" stroke-width="1" />
+    <line x1="650" y1="300" x2="600" y2="350" stroke="#a5b4fc" stroke-width="1" />
+  </g>
+  
+  <!-- Ana içerik elementleri -->
+  <!-- Saat görünümlü başlangıç ve ilerleme göstergesi -->
+  <g transform="translate(400, 250)">
+    <!-- Ana daire -->
+    <circle cx="0" cy="0" r="120" fill="none" stroke="#9333ea" stroke-width="8" />
+    
+    <!-- İlerleme göstergesi -->
+    <path d="M0,0 L0,-120" stroke="#f43f5e" stroke-width="6" stroke-linecap="round" transform="rotate(45)" />
+    <path d="M0,0 L80,0" stroke="#f97316" stroke-width="6" stroke-linecap="round" transform="rotate(130)" />
+    
+    <!-- Merkez nokta -->
+    <circle cx="0" cy="0" r="12" fill="#f43f5e" />
+    
+    <!-- Dijital varlık temsilleri -->
+    <g>
+      <!-- Coin temsilleri -->
+      <circle cx="-60" cy="-60" r="25" fill="#9333ea" opacity="0.9" />
+      <text x="-60" y="-55" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle">2020</text>
+      
+      <circle cx="70" cy="-30" r="20" fill="#6366f1" opacity="0.9" />
+      <text x="70" y="-25" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">2022</text>
+      
+      <circle cx="40" cy="80" r="30" fill="#3b82f6" opacity="0.9" />
+      <text x="40" y="85" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle">2025</text>
+    </g>
+  </g>
+  
+  <!-- Yansıyan ışık efektleri -->
+  <ellipse cx="400" cy="120" rx="300" ry="100" fill="url(#radialGlow)" opacity="0.3" />
+  
+  <!-- Gradyen tanımları -->
+  <defs>
+    <radialGradient id="radialGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#1e1e2e" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+</svg>

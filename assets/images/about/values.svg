@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Arka plan -->
+  <rect width="800" height="500" fill="#1e1e2e" />
+  
+  <!-- Dekoratif arka plan desenleri -->
+  <g opacity="0.15">
+    <path d="M0,0 L200,100 L0,200 Z" fill="#10b981" />
+    <path d="M800,0 L600,100 L800,200 Z" fill="#10b981" />
+    <path d="M0,500 L200,400 L0,300 Z" fill="#10b981" />
+    <path d="M800,500 L600,400 L800,300 Z" fill="#10b981" />
+  </g>
+  
+  <!-- Merkezi beşgen şekli (değerleri simgeliyor) -->
+  <g transform="translate(400, 250)">
+    <!-- Ana beşgen (5 değeri temsil ediyor) -->
+    <path d="M0,-150 L142.7,-46.35 L88.15,121.35 L-88.15,121.35 L-142.7,-46.35 Z" fill="#064e3b" stroke="#059669" stroke-width="3" />
+    
+    <!-- İç beşgen bağlantı çizgileri -->
+    <line x1="0" y1="-150" x2="0" y2="0" stroke="#059669" stroke-width="2" opacity="0.7" />
+    <line x1="142.7" y1="-46.35" x2="0" y2="0" stroke="#059669" stroke-width="2" opacity="0.7" />
+    <line x1="88.15" y1="121.35" x2="0" y2="0" stroke="#059669" stroke-width="2" opacity="0.7" />
+    <line x1="-88.15" y1="121.35" x2="0" y2="0" stroke="#059669" stroke-width="2" opacity="0.7" />
+    <line x1="-142.7" y1="-46.35" x2="0" y2="0" stroke="#059669" stroke-width="2" opacity="0.7" />
+    
+    <!-- Merkez nokta -->
+    <circle cx="0" cy="0" r="15" fill="#10b981" />
+    
+    <!-- Değerler için sembol daireleri -->
+    <!-- Dürüstlük sembolü (üst) -->
+    <g transform="translate(0, -120)">
+      <circle cx="0" cy="0" r="35" fill="#047857" />
+      <path d="M-15,0 L-5,10 L15,-10" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    
+    <!-- Yenilikçilik sembolü (sağ üst) -->
+    <g transform="translate(110, -35)">
+      <circle cx="0" cy="0" r="35" fill="#047857" />
+      <path d="M-15,-15 L15,15 M-15,15 L15,-15" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" />
+      <circle cx="0" cy="0" r="7" fill="white" />
+    </g>
+    
+    <!-- Müşteri odaklılık sembolü (sağ alt) -->
+    <g transform="translate(70, 95)">
+      <circle cx="0" cy="0" r="35" fill="#047857" />
+      <path d="M-10,-12 C-10,-5 0,10 0,10 C0,10 10,-5 10,-12 C10,-20 0,-20 0,-15 C0,-20 -10,-20 -10,-12 Z" fill="white" />
+    </g>
+    
+    <!-- Güvenlik sembolü (sol alt) -->
+    <g transform="translate(-70, 95)">
+      <circle cx="0" cy="0" r="35" fill="#047857" />
+      <path d="M0,-15 L15,0 L0,15 L-15,0 Z" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="0" cy="0" r="7" fill="white" />
+    </g>
+    
+    <!-- Sürdürülebilirlik sembolü (sol üst) -->
+    <g transform="translate(-110, -35)">
+      <circle cx="0" cy="0" r="35" fill="#047857" />
+      <path d="M-10,-5 C-10,15 10,15 10,-5 C10,-15 0,-10 0,-15 C0,-10 -10,-15 -10,-5 Z" fill="white" />
+    </g>
+  </g>
+  
+  <!-- Bağlantı/Değer çizgileri arka planda -->
+  <g opacity="0.1">
+    <line x1="100" y1="100" x2="700" y2="400" stroke="#34d399" stroke-width="1" />
+    <line x1="100" y1="400" x2="700" y2="100" stroke="#34d399" stroke-width="1" />
+    <line x1="400" y1="50" x2="400" y2="450" stroke="#34d399" stroke-width="1" />
+    <line x1="100" y1="250" x2="700" y2="250" stroke="#34d399" stroke-width="1" />
+    
+    <circle cx="100" cy="100" r="5" fill="#34d399" />
+    <circle cx="700" cy="400" r="5" fill="#34d399" />
+    <circle cx="100" cy="400" r="5" fill="#34d399" />
+    <circle cx="700" cy="100" r="5" fill="#34d399" />
+    <circle cx="400" cy="50" r="5" fill="#34d399" />
+    <circle cx="400" cy="450" r="5" fill="#34d399" />
+    <circle cx="100" cy="250" r="5" fill="#34d399" />
+    <circle cx="700" cy="250" r="5" fill="#34d399" />
+  </g>
+  
+  <!-- Işık efektleri -->
+  <circle cx="400" cy="250" r="225" fill="url(#valuesGlow)" opacity="0.2" />
+  
+  <!-- Gradient tanımları -->
+  <defs>
+    <radialGradient id="valuesGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#1e1e2e" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+</svg>

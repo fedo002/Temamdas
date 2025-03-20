@@ -1,0 +1,368 @@
+/* Mobile Packages Page Styling */
+
+.packages-page {
+    padding-bottom: 30px;
+}
+
+/* Header */
+.page-header {
+    margin-bottom: 20px;
+}
+
+.page-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Package Type Selector */
+.package-selector {
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.selector-btn {
+    flex: 1;
+    padding: 12px 5px;
+    font-size: 0.9rem;
+    color: #6e6b7b;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.selector-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Packages Section */
+.packages-section {
+    margin-bottom: 30px;
+}
+
+.packages-section h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* No Packages Message */
+.no-packages-message {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.no-packages-message i {
+    font-size: 2.5rem;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.no-packages-message p {
+    color: #6e6b7b;
+    margin: 0;
+}
+
+/* Package Cards */
+.packages-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.package-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.package-card:active {
+    transform: scale(0.98);
+}
+
+.package-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.mining-package .package-header {
+    background-color: var(--secondary-color);
+}
+
+.package-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 5px;
+}
+
+.package-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.package-body {
+    padding: 15px;
+    position: relative;
+}
+
+.current-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.package-features {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 15px;
+}
+
+.package-features li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+}
+
+.package-features li i {
+    color: var(--primary-color);
+    margin-right: 10px;
+    margin-top: 3px;
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.mining-package .package-features li i {
+    color: var(--secondary-color);
+}
+
+.package-features li span {
+    flex: 1;
+}
+
+.package-features li strong {
+    display: block;
+    margin-bottom: 2px;
+}
+
+.package-description {
+    font-size: 0.85rem;
+    color: #6e6b7b;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.package-footer {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.current-package {
+    border: 2px solid var(--secondary-color);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    padding: 0 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-success {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Info Section */
+.info-section {
+    margin-top: 30px;
+}
+
+.info-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.info-header {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.info-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.info-body {
+    padding: 15px;
+}
+
+/* Benefits List */
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.benefit-icon {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(115, 103, 240, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.benefit-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 5px;
+}
+
+.benefit-content p {
+    font-size: 0.85rem;
+    color: #6e6b7b;
+    margin: 0;
+}
+
+/* Mining Steps */
+.mining-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.step-number {
+    width: 25px;
+    height: 25px;
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 5px;
+}
+
+.step-content p {
+    font-size: 0.85rem;
+    color: #6e6b7b;
+    margin: 0;
+}
+
+.info-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background-color: rgba(115, 103, 240, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.info-note i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
+
+.info-note p {
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 576px) {
+    .packages-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    .packages-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 360px) {
+    .selector-btn {
+        font-size: 0.8rem;
+    }
+    
+    .package-features li {
+        font-size: 0.8rem;
+    }
+}

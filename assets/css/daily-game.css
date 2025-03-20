@@ -1,0 +1,759 @@
+/* Daily Game Page Styles */
+.daily-game-page {
+    padding: 15px;
+    color: #333;
+    position: relative;
+}
+
+/* Language Switcher */
+.language-switcher {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.lang-btn {
+    margin-left: 8px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.lang-btn:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.lang-btn.active {
+    background-color: var(--primary-color, #7367f0);
+    font-weight: bold;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loading-overlay.show {
+    display: flex;
+}
+
+.spinner {
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 5px solid white;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-overlay p {
+    color: white;
+    font-size: 1.2rem;
+}
+
+/* Game Explanation */
+.game-explanation {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.explanation-option {
+    text-align: center;
+    background-color: rgba(0,0,0,0.03);
+    border-radius: 10px;
+    padding: 15px;
+    width: 45%;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+
+.explanation-option:hover {
+    transform: translateY(-5px);
+}
+
+.explanation-option i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--primary-color, #7367f0);
+}
+
+.explanation-option h3 {
+    font-size: 1rem;
+    margin: 0 0 8px;
+    font-weight: 600;
+}
+
+.explanation-option p {
+    font-size: 0.8rem;
+    margin: 0;
+    color: #666;
+}
+
+/* Timer */
+.timer-container {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 400px;
+}
+
+.timer-bar {
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.timer-progress {
+    height: 100%;
+    background-color: #ff9f43;
+    width: 100%;
+    transition: width 1s linear;
+}
+
+.timer-text {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Game Header */
+.game-header {
+    background-color: var(--primary-color, #7367f0);
+    color: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(115, 103, 240, 0.3);
+}
+
+.game-header:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.1) 75%, transparent 75%, transparent);
+    background-size: 10px 10px;
+    opacity: 0.2;
+}
+
+.game-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 10px;
+}
+
+.game-header p {
+    opacity: 0.9;
+    margin: 0 0 15px;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.stat-badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.stat-badge i {
+    margin-right: 8px;
+}
+
+.vip-badge {
+    background-color: #ff9f43;
+    color: white;
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.vip-badge i {
+    margin-right: 5px;
+}
+
+/* Game Area */
+.game-area {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.game-stage {
+    text-align: center;
+}
+
+.game-stage h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: var(--primary-color, #7367f0);
+}
+
+.game-stage p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Dealer Animation - Positioned at the bottom */
+.dealer-animation {
+    position: relative;
+    height: 180px;
+    margin-top: 20px;
+    margin-bottom: 0;
+    display: none;
+}
+
+.dealer {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.dealer-avatar {
+    width: 60px;
+    height: 60px;
+    background-color: #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.dealer-table {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 120px;
+    background-color: #24862f;
+    border-radius: 0 0 120px 120px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border: 8px solid #743c16;
+    border-top: none;
+}
+
+.dealing-cards {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
+.dealing-card {
+    position: absolute;
+    width: 50px;
+    height: 70px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transform-origin: center bottom;
+    opacity: 0;
+}
+
+.dealing-card.card1 {
+    transform: rotate(-25deg) translateX(-80px);
+}
+
+.dealing-card.card2 {
+    transform: translateX(-25px);
+}
+
+.dealing-card.card3 {
+    transform: rotate(25deg) translateX(30px);
+}
+
+/* Card dealing animation - Adjusted for bottom dealing */
+@keyframes dealCard1 {
+    0% { opacity: 1; transform: rotate(0) translateX(0); }
+    100% { opacity: 1; transform: rotate(-25deg) translateX(-80px) translateY(-60px); }
+}
+
+@keyframes dealCard2 {
+    0% { opacity: 1; transform: rotate(0) translateX(0); }
+    100% { opacity: 1; transform: translateX(-25px) translateY(-60px); }
+}
+
+@keyframes dealCard3 {
+    0% { opacity: 1; transform: rotate(0) translateX(0); }
+    100% { opacity: 1; transform: rotate(25deg) translateX(30px) translateY(-60px); }
+}
+
+/* Cards */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    perspective: 1000px;
+}
+
+.three-cards {
+    flex-wrap: wrap;
+}
+
+.three-cards .game-card {
+    flex: 0 0 calc(33% - 15px);
+    margin-bottom: 15px;
+}
+
+.game-card {
+    width: 100px; /* Smaller initial size */
+    height: 140px;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s, filter 0.3s;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.game-card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card-front {
+    color: white;
+    border: 3px solid white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Card shaking animation */
+@keyframes cardShake {
+    0% { transform: translate(0, 0) rotate(0); }
+    20% { transform: translate(-2px, 0) rotate(-2deg); }
+    40% { transform: translate(2px, 0) rotate(2deg); }
+    60% { transform: translate(-2px, 0) rotate(-1deg); }
+    80% { transform: translate(2px, 0) rotate(1deg); }
+    100% { transform: translate(0, 0) rotate(0); }
+}
+
+.shake {
+    animation: cardShake 0.5s ease-in-out infinite;
+    filter: brightness(1.1);
+}
+
+/* Random card colors */
+.card-color-1 {
+    background: linear-gradient(135deg, #7367F0, #4839EB);
+}
+
+.card-color-2 {
+    background: linear-gradient(135deg, #FF9F43, #FF8412);
+}
+
+.card-color-3 {
+    background: linear-gradient(135deg, #28C76F, #1F9D57);
+}
+
+.card-back {
+    background-color: white;
+    color: #333;
+    border: 3px solid var(--primary-color, #7367f0);
+    transform: rotateY(180deg);
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-content i {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.card-result {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Card reveal animation */
+@keyframes reveal {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.card-result i, .card-result h3 {
+    animation: reveal 0.5s ease-out forwards;
+}
+
+/* Decision Buttons */
+.decision-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Reward Badges */
+.possible-rewards {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.reward-badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.reward-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: 600;
+}
+
+.reward-badge.low {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+.reward-badge.medium {
+    background-color: #4a00e0;
+    color: white;
+}
+
+.reward-badge.high {
+    background-color: #ff9f43;
+    color: white;
+}
+
+/* No Attempts */
+.no-attempts {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.no-attempts i {
+    font-size: 3rem;
+    color: #ff9f43;
+    margin-bottom: 20px;
+}
+
+.no-attempts h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.no-attempts p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color, #7367f0);
+    color: white;
+}
+
+.btn-success {
+    background-color: #28c76f;
+    color: white;
+}
+
+.btn-warning {
+    background-color: #ff9f43;
+    color: white;
+}
+
+/* Spacing for multiple buttons */
+.mr-2 {
+    margin-right: 0.5rem;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 20% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1001;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.close-modal {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    text-align: right;
+}
+
+.backdrop {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.backdrop.show {
+    opacity: 1;
+}
+
+/* Confetti animation for big wins */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background-color: #f00;
+    top: -10px;
+    z-index: 1002;
+    animation: confetti-fall 4s linear forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Custom message box styles */
+.custom-message-box {
+    display: none;
+    position: fixed;
+    z-index: 2001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.message-box-content {
+    background-color: white;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: message-box-in 0.3s ease-out;
+}
+
+@keyframes message-box-in {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.message-box-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.message-box-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color, #7367f0);
+}
+
+.message-box-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.message-box-body p {
+    margin: 0;
+    color: #666;
+}
+
+.message-box-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    color: #666;
+}
+
+/* No translate utility class for elements that shouldn't be translated */
+.no-translate {
+    /* Bu etiket, Linguise tarafından çevrilmemesi gereken elemanları işaretler */
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .explanation-option {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .game-card {
+        width: 90px;
+        height: 126px;
+    }
+    
+    .card-content i {
+        font-size: 2rem;
+    }
+    
+    .decision-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .decision-buttons .btn {
+        width: 100%;
+    }
+}

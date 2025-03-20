@@ -1,0 +1,325 @@
+/* Mobile Authentication Pages CSS */
+
+.auth-page {
+    min-height: calc(100vh - var(--header-height) - var(--bottom-nav-height));
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.auth-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-logo h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 10px;
+    color: var(--primary-color);
+}
+
+.auth-form {
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px 20px;
+    box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
+    margin-bottom: 20px;
+}
+
+.auth-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.auth-subtitle {
+    color: #6e6b7b;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 15px;
+    color: #6e6b7b;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    height: 50px;
+    border-radius: 8px;
+    padding: 10px 15px 10px 40px;
+    font-size: 0.95rem;
+    width: 100%;
+    border: 1px solid #ddd;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(115, 103, 240, 0.25);
+    outline: none;
+}
+
+.form-text {
+    font-size: 0.8rem;
+    color: #6e6b7b;
+    margin-top: 5px;
+    display: block;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 30px;
+    top: 40%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #6e6b7b;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.password-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forgot-password {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.remember-me {
+    margin-top: -10px;
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    padding-left: 30px;
+    min-height: 24px;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.custom-checkbox label {
+    cursor: pointer;
+    margin: 0;
+    font-weight: normal;
+    font-size: 0.9rem;
+}
+
+.custom-checkbox label a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.custom-checkbox::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 2px solid #ddd;
+    background-color: white;
+}
+
+.custom-checkbox.checked::before {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.custom-checkbox.checked::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 4px;
+    top: 0;
+    color: white;
+    font-size: 0.7rem;
+}
+
+.btn {
+    height: 50px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease-in-out;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:active {
+    background-color: #5e50dc;
+}
+
+.btn-outline-primary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.btn-outline-primary:active {
+    background-color: rgba(115, 103, 240, 0.1);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+.auth-footer {
+    text-align: center;
+}
+
+.auth-footer p {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #6e6b7b;
+}
+
+.auth-footer .btn {
+    padding: 10px 20px;
+    height: auto;
+}
+
+.alert {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.alert-danger {
+    background-color: rgba(234, 84, 85, 0.12);
+    color: #ea5455;
+}
+
+.alert ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.alert ul li {
+    margin-bottom: 5px;
+}
+
+.alert ul li:last-child {
+    margin-bottom: 0;
+}
+
+/* RTL Support */
+html[dir="rtl"] .input-wrapper i {
+    left: auto;
+    right: 15px;
+}
+
+html[dir="rtl"] .form-control {
+    padding: 10px 40px 10px 15px;
+}
+
+html[dir="rtl"] .toggle-password {
+    right: auto;
+    left: 10px;
+}
+
+html[dir="rtl"] .custom-checkbox {
+    padding-left: 0;
+    padding-right: 30px;
+}
+
+html[dir="rtl"] .custom-checkbox::before {
+    left: auto;
+    right: 0;
+}
+
+html[dir="rtl"] .custom-checkbox.checked::after {
+    left: auto;
+    right: 4px;
+}
+
+html[dir="rtl"] .btn i {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+/* Touch feedback */
+.btn:active {
+    transform: scale(0.98);
+}
+
+.form-control:active {
+    transform: scale(0.99);
+}
+
+/* Adaptive font size for smaller screens */
+@media (max-width: 360px) {
+    .auth-title {
+        font-size: 1.3rem;
+    }
+    
+    .auth-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .form-control {
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        font-size: 0.95rem;
+    }
+}

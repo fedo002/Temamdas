@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Arka plan -->
+  <rect width="800" height="500" fill="#1e1e2e" />
+  
+  <!-- Dekoratif arka plan desenleri -->
+  <g opacity="0.15">
+    <path d="M0,0 L800,100 L800,0 Z" fill="#06b6d4" />
+    <path d="M0,500 L800,400 L800,500 Z" fill="#06b6d4" />
+  </g>
+  
+  <!-- Ana hedef/başarı sembolü -->
+  <g transform="translate(400, 250)">
+    <!-- Dış daire -->
+    <circle cx="0" cy="0" r="130" fill="none" stroke="#0ea5e9" stroke-width="6" stroke-dasharray="15,8" />
+    
+    <!-- Orta daire -->
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#0284c7" stroke-width="3" />
+    
+    <!-- İç daire -->
+    <circle cx="0" cy="0" r="70" fill="#0c4a6e" stroke="#0ea5e9" stroke-width="2" />
+    
+    <!-- Merkez nokta (hedef) -->
+    <circle cx="0" cy="0" r="20" fill="#0ea5e9" />
+    
+    <!-- Hedef çizgileri -->
+    <line x1="-130" y1="0" x2="130" y2="0" stroke="#0ea5e9" stroke-width="2" opacity="0.5" />
+    <line x1="0" y1="-130" x2="0" y2="130" stroke="#0ea5e9" stroke-width="2" opacity="0.5" />
+    
+    <!-- Erişilebilirlik, güvenlik ve kârlılık sembolleri -->
+    <!-- Erişilebilirlik sembolü -->
+    <g transform="translate(-60, -60) scale(0.8)">
+      <circle cx="0" cy="0" r="30" fill="#0284c7" opacity="0.8" />
+      <path d="M-12,-5 L0,-15 L12,-5 M0,-15 L0,15 M-15,5 L15,5" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" />
+    </g>
+    
+    <!-- Güvenlik sembolü -->
+    <g transform="translate(60, -60) scale(0.8)">
+      <circle cx="0" cy="0" r="30" fill="#0284c7" opacity="0.8" />
+      <path d="M0,-15 L15,0 L0,15 L-15,0 Z" stroke="white" stroke-width="3" fill="none" />
+      <circle cx="0" cy="0" r="7" fill="none" stroke="white" stroke-width="3" />
+    </g>
+    
+    <!-- Kârlılık sembolü -->
+    <g transform="translate(0, 70) scale(0.8)">
+      <circle cx="0" cy="0" r="30" fill="#0284c7" opacity="0.8" />
+      <path d="M-10,10 L-10,-10 L10,-10 L10,10 M0,-10 L0,10 M-10,0 L10,0" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" />
+    </g>
+  </g>
+  
+  <!-- Blockchain/Dijital ekonomi sembolleri -->
+  <g opacity="0.7">
+    <!-- Üst sol coin -->
+    <g transform="translate(150, 150)">
+      <circle cx="0" cy="0" r="40" fill="none" stroke="#0ea5e9" stroke-width="2" />
+      <text x="0" y="0" font-family="Arial, sans-serif" font-size="30" fill="#0ea5e9" text-anchor="middle" dominant-baseline="middle">₿</text>
+    </g>
+    
+    <!-- Üst sağ coin -->
+    <g transform="translate(650, 150)">
+      <circle cx="0" cy="0" r="35" fill="none" stroke="#38bdf8" stroke-width="2" />
+      <text x="0" y="0" font-family="Arial, sans-serif" font-size="30" fill="#38bdf8" text-anchor="middle" dominant-baseline="middle">Ξ</text>
+    </g>
+    
+    <!-- Alt sol coin -->
+    <g transform="translate(200, 370)">
+      <circle cx="0" cy="0" r="30" fill="none" stroke="#7dd3fc" stroke-width="2" />
+      <text x="0" y="5" font-family="Arial, sans-serif" font-size="25" fill="#7dd3fc" text-anchor="middle" dominant-baseline="middle">₮</text>
+    </g>
+    
+    <!-- Alt sağ coin -->
+    <g transform="translate(600, 370)">
+      <circle cx="0" cy="0" r="35" fill="none" stroke="#0369a1" stroke-width="2" />
+      <text x="0" y="5" font-family="Arial, sans-serif" font-size="40" fill="#0369a1" text-anchor="middle" dominant-baseline="middle">$</text>
+    </g>
+  </g>
+  
+  <!-- Işık efektleri -->
+  <circle cx="400" cy="250" r="200" fill="url(#missionGlow)" opacity="0.15" />
+  
+  <!-- Gradient tanımları -->
+  <defs>
+    <radialGradient id="missionGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="100%" stop-color="#1e1e2e" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+</svg>

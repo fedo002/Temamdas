@@ -1,0 +1,223 @@
+/* About page styling */
+.about-page {
+    padding-bottom: 60px;
+  }
+  
+  .about-hero {
+    background-color: #f8f9fa;
+    padding: 80px 0;
+    text-align: center;
+    margin-bottom: 60px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/about/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+  }
+  
+  .about-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  
+  .about-subtitle {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+  
+  .about-section {
+    margin-bottom: 80px;
+  }
+  
+  .about-content h2 {
+    margin-bottom: 25px;
+    font-size: 2.2rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 15px;
+  }
+  
+  .about-content h2:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: #007bff;
+  }
+  
+  .content-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+  }
+  
+  .about-image {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .about-image img {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    object-fit: cover;
+  }
+  
+  .values-list {
+    padding-left: 20px;
+  }
+  
+  .values-list li {
+    margin-bottom: 15px;
+  }
+  
+  .team-section {
+    text-align: center;
+    padding-top: 40px;
+  }
+  
+  .team-section h2 {
+    margin-bottom: 15px;
+    font-size: 2.2rem;
+    font-weight: 600;
+  }
+  
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto 50px;
+  }
+  
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+  }
+  
+  .team-member {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 30px 20px;
+  }
+  
+  .team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .member-photo {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #f8f9fa;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .member-name {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  
+  .member-position {
+    color: #007bff;
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+  
+  .member-bio {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .member-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .social-link:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .about-hero {
+      padding: 60px 0;
+    }
+    
+    .about-hero h1 {
+      font-size: 2.5rem;
+    }
+    
+    .about-section {
+      margin-bottom: 60px;
+    }
+    
+    .about-content h2 {
+      font-size: 1.8rem;
+    }
+    
+    .team-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .order-md-1 {
+      order: 1;
+    }
+    
+    .order-md-2 {
+      order: 2;
+    }
+    
+    .about-content {
+      margin-top: 30px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .about-hero {
+      padding: 40px 0;
+    }
+    
+    .about-hero h1 {
+      font-size: 2rem;
+    }
+    
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+  }
