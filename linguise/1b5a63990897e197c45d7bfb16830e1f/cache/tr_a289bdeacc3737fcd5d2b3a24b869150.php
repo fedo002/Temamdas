@@ -1,0 +1,1 @@
+<?php die(); ?>{"status":"error","message":"daily_limit_reached","translated_strings":{"error_title":"error","error_message":"daily_limit_reached","try_tomorrow":"try_tomorrow","ok_button":"ok"}}

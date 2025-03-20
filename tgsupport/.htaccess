@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /tgsupport/
+    
+    # API endpointleri için yönlendirme
+    RewriteRule ^api/?$ api/index.php [L]
+    RewriteRule ^api/([^/]+)/?$ api/index.php [QSA,L]
+</IfModule>

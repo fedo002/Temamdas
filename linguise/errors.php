@@ -1,0 +1,21 @@
+
+[2025-03-20 15:46:25] Content type not translatable text/css
+[2025-03-20 15:46:15] Content type not translatable text/css
+[2025-03-20 15:44:54] Content type not translatable audio/mpeg
+[2025-03-20 15:44:54] Content type not translatable audio/mpeg
+[2025-03-20 15:44:54] Content type not translatable audio/mpeg
+[2025-03-20 15:44:54] Content type not translatable audio/mpeg
+[2025-03-20 15:44:54] Content type not translatable text/css
+[2025-03-20 15:44:54] Content type not translatable application/javascript
+[2025-03-20 15:44:52] Content type not translatable image/png
+[2025-03-20 15:44:51] Content type not translatable application/javascript
+[2025-03-20 15:44:51] Content type not translatable text/css
+[2025-03-20 15:44:51] Content type not translatable text/css
+[2025-03-20 15:44:51] Content type not translatable text/css
+[2025-03-20 15:44:51] Content type not translatable text/css
+[2025-03-20 15:44:51] Content type not translatable text/css
+[2025-03-20 15:44:51] Content type not translatable text/css
+[2025-03-20 15:44:20] Content type not translatable text/css
+[2025-03-20 15:44:00] Content type not translatable image/png
+[2025-03-20 15:43:56] Content type not translatable text/css
+[2025-03-20 15:43:47] Content type not translatable text/css
